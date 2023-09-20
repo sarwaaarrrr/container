@@ -1,8 +1,17 @@
 import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
 
 export async function DAT() {
   try {
-    const browser = await puppeteer.launch({ headless: false });
+    // const browser = await puppeteer.launch( { args: ['--no-sandbox'] } );
+
+    const browser = await chromium.puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: false,
+      ignoreHTTPSErrors: true,
+    });
     const page = await browser.newPage();
     await page.setViewport({ width: 0, height: 0 });
 

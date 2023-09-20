@@ -1,4 +1,4 @@
-import { DAT } from "../dat";
+import { DAT } from "./dat";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
